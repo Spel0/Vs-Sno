@@ -1,1 +1,5 @@
 Test:bf-pixel:0
+Snowflake:bf:1
+Blizzard:bf:1
+Avalanche:bf:1
+Melted:bf:1
