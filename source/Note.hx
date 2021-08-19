@@ -32,6 +32,7 @@ class Note extends FlxSprite
 	public var isSustainNote:Bool = false;
 	public var originColor:Int = 0; // The sustain note's original note's color
 	public var noteSection:Int = 0;
+	public var noteType:Int = 0;
 
 	public var noteCharterObject:FlxSprite;
 
@@ -61,7 +62,7 @@ class Note extends FlxSprite
 
 	public var children:Array<Note> = [];
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inCharter:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inCharter:Bool = false, ?noteType:Int = 0)
 	{
 		super();
 
@@ -69,6 +70,7 @@ class Note extends FlxSprite
 			prevNote = this;
 
 		this.prevNote = prevNote;
+		this.noteType = noteType;
 		isSustainNote = sustainNote;
 
 		x += 50;
@@ -114,6 +116,16 @@ class Note extends FlxSprite
 				animation.addByPrefix(dataColor[i] + 'holdend', dataColor[i] + ' tail'); // Tails
 			}
 
+			switch(noteType)
+			{
+				case 2:
+					frames = Paths.getSparrowAtlas('ICE_NOTES');
+					for (i in 0...4)
+					{
+						animation.addByPrefix(dataColor[i] + 'Scroll', 'ICE ' + dataColor[i]);
+					}
+			}
+
 			setGraphicSize(Std.int(width * 0.7));
 			updateHitbox();
 			if(FlxG.save.data.antialiasing)
@@ -151,6 +163,16 @@ class Note extends FlxSprite
 						animation.addByPrefix(dataColor[i] + 'Scroll', dataColor[i] + ' alone'); // Normal notes
 						animation.addByPrefix(dataColor[i] + 'hold', dataColor[i] + ' hold'); // Hold
 						animation.addByPrefix(dataColor[i] + 'holdend', dataColor[i] + ' tail'); // Tails
+					}
+
+					switch(noteType)
+					{
+						case 2:
+							frames = Paths.getSparrowAtlas('ICE_NOTES');
+							for (i in 0...4)
+							{
+								animation.addByPrefix(dataColor[i] + 'Scroll', 'ICE ' + dataColor[i]);
+							}
 					}
 
 					setGraphicSize(Std.int(width * 0.7));

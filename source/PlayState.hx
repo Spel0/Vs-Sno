@@ -1931,7 +1931,9 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
+				var daType = songNotes[3];
+
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, false, daType);
 
 				if (!gottaHitNote && PlayStateChangeables.Optimize)
 					continue;
@@ -3110,6 +3112,12 @@ class PlayState extends MusicBeatState
 					if (PlayState.curStage.startsWith('school'))
 						daNote.x -= 11;
 				}
+				switch (daNote.noteType)
+				{
+					case 2:
+						daNote.x -= 20;
+				}
+				
 
 				// trace(daNote.y);
 				// WIP interpolation shit? Need to fix the pause issue
@@ -3126,86 +3134,94 @@ class PlayState extends MusicBeatState
 						}
 						else
 						{
-							if (loadRep && daNote.isSustainNote)
+							switch (daNote.noteType)
 							{
-								// im tired and lazy this sucks I know i'm dumb
-								if (findByTime(daNote.strumTime) != null)
-									totalNotesHit += 1;
-								else
+								case 2:
+									//do nothing
+								default:
 								{
-									if (!daNote.isSustainNote)
-										health -= 0.10;
-									vocals.volume = 0;
-									if (theFunne && !daNote.isSustainNote)
-										noteMiss(daNote.noteData, daNote);
-									if (daNote.isParent)
+									if (loadRep && daNote.isSustainNote)
 									{
-										health -= 0.20; // give a health punishment for failing a LN
-										trace("hold fell over at the start");
-										for (i in daNote.children)
+										// im tired and lazy this sucks I know i'm dumb
+										if (findByTime(daNote.strumTime) != null)
+											totalNotesHit += 1;
+										else
 										{
-											i.alpha = 0.3;
-											i.sustainActive = false;
+											if (!daNote.isSustainNote)
+												health -= 0.10;
+											vocals.volume = 0;
+											if (theFunne && !daNote.isSustainNote)
+												noteMiss(daNote.noteData, daNote);
+											if (daNote.isParent)
+											{
+												health -= 0.20; // give a health punishment for failing a LN
+												trace("hold fell over at the start");
+												for (i in daNote.children)
+												{
+													i.alpha = 0.3;
+													i.sustainActive = false;
+												}
+											}
+											else
+											{
+												if (!daNote.wasGoodHit
+													&& daNote.isSustainNote
+													&& daNote.sustainActive
+													&& daNote.spotInLine != daNote.parent.children.length)
+												{
+													health -= 0.20; // give a health punishment for failing a LN
+													trace("hold fell over at " + daNote.spotInLine);
+													for (i in daNote.parent.children)
+													{
+														i.alpha = 0.3;
+														i.sustainActive = false;
+													}
+													if (daNote.parent.wasGoodHit)
+														misses++;
+													updateAccuracy();
+												}
+											}
 										}
 									}
 									else
 									{
-										if (!daNote.wasGoodHit
-											&& daNote.isSustainNote
-											&& daNote.sustainActive
-											&& daNote.spotInLine != daNote.parent.children.length)
+										if (!daNote.isSustainNote)
+											health -= 0.10;
+										vocals.volume = 0;
+										if (theFunne && !daNote.isSustainNote)
+											noteMiss(daNote.noteData, daNote);
+
+										if (daNote.isParent)
 										{
 											health -= 0.20; // give a health punishment for failing a LN
-											trace("hold fell over at " + daNote.spotInLine);
-											for (i in daNote.parent.children)
+											trace("hold fell over at the start");
+											for (i in daNote.children)
 											{
 												i.alpha = 0.3;
 												i.sustainActive = false;
+												trace(i.alpha);
 											}
-											if (daNote.parent.wasGoodHit)
-												misses++;
-											updateAccuracy();
 										}
-									}
-								}
-							}
-							else
-							{
-								if (!daNote.isSustainNote)
-									health -= 0.10;
-								vocals.volume = 0;
-								if (theFunne && !daNote.isSustainNote)
-									noteMiss(daNote.noteData, daNote);
-
-								if (daNote.isParent)
-								{
-									health -= 0.20; // give a health punishment for failing a LN
-									trace("hold fell over at the start");
-									for (i in daNote.children)
-									{
-										i.alpha = 0.3;
-										i.sustainActive = false;
-										trace(i.alpha);
-									}
-								}
-								else
-								{
-									if (!daNote.wasGoodHit
-										&& daNote.isSustainNote
-										&& daNote.sustainActive
-										&& daNote.spotInLine != daNote.parent.children.length)
-									{
-										health -= 0.20; // give a health punishment for failing a LN
-										trace("hold fell over at " + daNote.spotInLine);
-										for (i in daNote.parent.children)
+										else
 										{
-											i.alpha = 0.3;
-											i.sustainActive = false;
-											trace(i.alpha);
+											if (!daNote.wasGoodHit
+												&& daNote.isSustainNote
+												&& daNote.sustainActive
+												&& daNote.spotInLine != daNote.parent.children.length)
+											{
+												health -= 0.20; // give a health punishment for failing a LN
+												trace("hold fell over at " + daNote.spotInLine);
+												for (i in daNote.parent.children)
+												{
+													i.alpha = 0.3;
+													i.sustainActive = false;
+													trace(i.alpha);
+												}
+												if (daNote.parent.wasGoodHit)
+													misses++;
+												updateAccuracy();
+											}
 										}
-										if (daNote.parent.wasGoodHit)
-											misses++;
-										updateAccuracy();
 									}
 								}
 							}
@@ -3445,38 +3461,47 @@ class PlayState extends MusicBeatState
 
 		var daRating = daNote.rating;
 
-		switch (daRating)
+		switch (daNote.noteType)
 		{
-			case 'shit':
-				score = -300;
-				combo = 0;
-				misses++;
-				health -= 0.06;
-				ss = false;
-				shits++;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit -= 1;
-			case 'bad':
-				daRating = 'bad';
-				score = 0;
-				health -= 0.03;
-				ss = false;
-				bads++;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit += 0.50;
-			case 'good':
-				daRating = 'good';
-				score = 200;
-				ss = false;
-				goods++;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit += 0.75;
-			case 'sick':
-				if (health < 2)
-					health += 0.04;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit += 1;
-				sicks++;
+			case 2:
+				FlxG.sound.play(Paths.sound('ice'));
+				health -= 0.2;
+			default:
+			{
+				switch (daRating)
+				{
+					case 'shit':
+						score = -300;
+						combo = 0;
+						misses++;
+						health -= 0.06;
+						ss = false;
+						shits++;
+						if (FlxG.save.data.accuracyMod == 0)
+							totalNotesHit -= 1;
+					case 'bad':
+						daRating = 'bad';
+						score = 0;
+						health -= 0.03;
+						ss = false;
+						bads++;
+						if (FlxG.save.data.accuracyMod == 0)
+							totalNotesHit += 0.50;
+					case 'good':
+						daRating = 'good';
+						score = 200;
+						ss = false;
+						goods++;
+						if (FlxG.save.data.accuracyMod == 0)
+							totalNotesHit += 0.75;
+					case 'sick':
+						if (health < 2)
+							health += 0.04;
+						if (FlxG.save.data.accuracyMod == 0)
+							totalNotesHit += 1;
+						sicks++;
+				}
+			}
 		}
 
 

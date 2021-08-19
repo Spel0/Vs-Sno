@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="ICE_NOTES.png">
+	<!-- Created with Adobe Animate version 21.0.6.41649 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="ICE blue0000" x="0" y="0" width="211" height="267"/>
+	<SubTexture name="ICE green0000" x="211" y="0" width="211" height="267"/>
+	<SubTexture name="ICE purple0000" x="422" y="0" width="211" height="267"/>
+	<SubTexture name="ICE red0000" x="633" y="0" width="211" height="267"/>
+</TextureAtlas>
