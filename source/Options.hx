@@ -364,6 +364,29 @@ class ShowInput extends Option
 	}
 }
 
+class EditorRes extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		FlxG.save.data.editorBG = !FlxG.save.data.editorBG;
+		
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return  FlxG.save.data.editorBG ? "Show Editor Grid" : "Do not Show Editor Grid";
+	}
+
+}
+
 
 class Judgement extends Option
 {

@@ -145,7 +145,9 @@ class ChartingState extends MusicBeatState
 
 		deezNuts.set(4,1);
 		deezNuts.set(8,2);
+		deezNuts.set(12,3);
 		deezNuts.set(16,4);
+		deezNuts.set(24,6);
 		deezNuts.set(32,8);
 		deezNuts.set(64,16);
 
@@ -259,7 +261,7 @@ class ChartingState extends MusicBeatState
 				lastSeg = seg;
 		}
 
-		recalculateAllSectionTimes();		
+		recalculateAllSectionTimes();	
 
 		trace("Song length in MS: " + FlxG.sound.music.length);
 
@@ -619,7 +621,9 @@ class ChartingState extends MusicBeatState
 					}
 
 					if (pog.type == "BPM Change")
+					{
 						recalculateAllSectionTimes();
+					}
 
 				regenerateLines();
 
@@ -1250,6 +1254,32 @@ class ChartingState extends MusicBeatState
 	var stepperSusLength:FlxUINumericStepper;
 
 	var tab_group_note:FlxUI;
+
+	function goToSection(section:Int)
+		{
+			var beat = section * 4;
+			var data = TimingStruct.getTimingAtBeat(beat);
+	
+			if (data == null)
+				return;
+	
+			claps.splice(0, claps.length);
+			FlxG.sound.music.time = (beat / (data.bpm / 60)) * 1000;
+			vocals.time = FlxG.sound.music.time;
+			curSection = section;
+			trace("Going too " + FlxG.sound.music.time + " | " + section + " | Which is at " + beat);
+	
+			if (FlxG.sound.music.time < 0)
+			{
+				FlxG.sound.music.time = 0;
+				vocals.time = 0;
+			}
+			else if (FlxG.sound.music.time > FlxG.sound.music.length)
+			{
+				FlxG.sound.music.time = FlxG.sound.music.length;
+				vocals.time = FlxG.sound.music.time;
+			}
+		}
 	
 	function addNoteUI():Void
 	{
@@ -1386,10 +1416,55 @@ class ChartingState extends MusicBeatState
 				case 'song_bpm':
 					if (nums.value <= 0)
 						nums.value = 1;
-					tempBpm = Std.int(nums.value);
-					Conductor.mapBPMChanges(_song);
-					Conductor.changeBPM(Std.int(nums.value));
+					_song.bpm = nums.value;
 
+					if (_song.eventObjects[0].type != "BPM Change")
+						Application.current.window.alert("i'm crying, first event isn't a bpm change. fuck you");
+					else
+					{
+						_song.eventObjects[0].value = nums.value;
+						regenerateLines();
+					}
+
+					TimingStruct.clearTimings();
+
+					var currentIndex = 0;
+					for (i in _song.eventObjects)
+						{
+							var name = Reflect.field(i,"name");
+							var type = Reflect.field(i,"type");
+							var pos = Reflect.field(i,"position");
+							var value = Reflect.field(i,"value");
+	
+							trace(i.type);
+							if (type == "BPM Change")
+							{
+								var beat:Float = pos;
+	
+								var endBeat:Float = Math.POSITIVE_INFINITY;
+	
+								TimingStruct.addTiming(beat,value,endBeat, 0); // offset in this case = start time since we don't have a offset
+								
+								if (currentIndex != 0)
+								{
+									var data = TimingStruct.AllTimings[currentIndex - 1];
+									data.endBeat = beat;
+									data.length = (data.endBeat - data.startBeat) / (data.bpm / 60);
+									var step = ((60 / data.bpm) * 1000) / 4;
+									TimingStruct.AllTimings[currentIndex].startTime = data.startTime + data.length;
+								}
+	
+								currentIndex++;
+							}
+						}
+					trace("BPM CHANGES:");
+	
+					for (i in TimingStruct.AllTimings)
+						trace(i.bpm + " - START: " + i.startBeat + " - END: " + i.endBeat + " - START-TIME: " + i.startTime);
+	
+					recalculateAllSectionTimes();
+	
+					regenerateLines();
 				case 'note_susLength':
 					if (curSelectedNote == null)
 						return;
@@ -1468,6 +1543,8 @@ class ChartingState extends MusicBeatState
 
 	public var updateFrame = 0;
 	public var lastUpdatedSection:SwagSection = null;
+
+	public var snapSelection = 3;
 
 	public function resizeEverything()
 	{
@@ -1572,11 +1649,17 @@ class ChartingState extends MusicBeatState
 	
 								FlxG.sound.music.time = (data.startTime + ((beats - data.startBeat) / (bpm/60)) ) * 1000;
 							}
+							else
+								FlxG.sound.music.time -= (FlxG.mouse.wheel * Conductor.stepCrochet * 0.4);
 						}
 						if (!PlayState.isSM)
 						vocals.time = FlxG.sound.music.time;
 					}
 				}
+			if (FlxG.keys.justPressed.RIGHT && !FlxG.keys.pressed.CONTROL)
+				goToSection(curSection + 1);
+			else if (FlxG.keys.justPressed.LEFT  && !FlxG.keys.pressed.CONTROL)
+				goToSection(curSection - 1);
 		}
 
 		if (updateFrame == 4)
@@ -1614,21 +1697,54 @@ class ChartingState extends MusicBeatState
 		else if (updateFrame != 5)
 			updateFrame++;
 
-		snapText.text = "Snap: 1/" + snap + " (" + (doSnapShit ? "Shift to disable, Left or Right to increase/decrease" : "Snap Disabled, Shift to renable.") + ")\nAdd Notes: 1-8 (or click)\nZoom: " + zoomFactor;
+		snapText.text = "Snap: 1/" + snap + " (" + (doSnapShit ? "Shift to disable, CTRL Left or Right to increase/decrease" : "Snap Disabled, Shift to renable.") + ")\nAdd Notes: 1-8 (or click)\nZoom: " + zoomFactor;
 
 
-		if (FlxG.keys.justPressed.RIGHT)
-			snap = snap * 2;
-		if (FlxG.keys.justPressed.LEFT)
-			snap = Math.round(snap / 2);
+		if (FlxG.keys.justPressed.RIGHT && FlxG.keys.pressed.CONTROL)
+		{
+			snapSelection++;
+			var index = 6;
+			if (snapSelection > 6)
+				snapSelection = 6;
+			if (snapSelection < 0)
+				snapSelection = 0;
+			for (v in deezNuts.keys()){
+				trace(v);
+				if (index == snapSelection)
+				{
+					trace("found " + v + " at " + index);
+					snap = v;
+				}
+				index--;
+			   }
+			trace("new snap " + snap + " | " + snapSelection);
+		}
+		if (FlxG.keys.justPressed.LEFT && FlxG.keys.pressed.CONTROL)
+			{
+				snapSelection--;
+				if (snapSelection > 6)
+					snapSelection = 6;
+				if (snapSelection < 0)
+					snapSelection = 0;
+				var index = 6;
+				for (v in deezNuts.keys()){
+					trace(v);
+					if (index == snapSelection)
+					{
+						trace("found " + v + " at " + index);
+						snap = v;
+					}
+					index--;
+				   }
+				trace("new snap " + snap + " | " + snapSelection);
+			}
 		if (snap >= 64)
 			snap = 64;
 		if (snap <= 4)
 			snap = 4;
-		/*
+
 		if (FlxG.keys.justPressed.SHIFT)
 			doSnapShit = !doSnapShit;
-		*/
 
 		doSnapShit = defaultSnap;
 		if (FlxG.keys.pressed.SHIFT)
@@ -2494,6 +2610,7 @@ class ChartingState extends MusicBeatState
 		curSelectedNote = thingy;
 
 		updateGrid();
+
 		updateNoteUI();
 
 		autosaveSong();
