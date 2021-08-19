@@ -22908,21 +22908,21 @@
     "mustHitSection": true
    }
   ],
-  "player2": "bf",
+  "player2": "sno",
   "eventObjects": [
    {
     "name": "Init BPM",
     "position": 0,
-    "value": 150,
+    "value" : 130,
     "type": "BPM Change"
    }
   ],
   "chartVersion": "2",
-  "song": "Melted",
+  "song": "Avalanche",
   "stage": "stage",
   "validScore": true,
   "needsVoices": true,
-  "bpm": 150,
+  "bpm": 130,
   "speed": 2
  }
 }
