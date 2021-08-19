@@ -66,7 +66,7 @@ class ChartingState extends MusicBeatState
 	public static var lengthInBeats:Float = 0;
 
 	public var beatsShown:Float = 1; // for the zoom factor
-	public var zoomFactor:Float = 1;
+	public var zoomFactor:Float = 0.4;
 
 	/**
 	 * Array of notes showing when each section STARTS in STEPS
