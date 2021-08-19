@@ -1,12 +1,26 @@
 {
  "song": {
   "player1": "bf",
+  "gfVersion": "gf",
   "notes": [
    {
     "endTime": 1600,
     "altAnim": null,
     "mustHitSection": false,
-    "sectionNotes": [],
+    "sectionNotes": [
+     [
+      425,
+      1,
+      0,
+      0
+     ],
+     [
+      475,
+      6,
+      200,
+      0
+     ]
+    ],
     "typeOfSection": 0,
     "lengthInSteps": 16,
     "startTime": 0,
@@ -22890,374 +22904,11 @@
     "bpm": 150,
     "startTime": 3328000,
     "changeBPM": false,
-    "endTime": 3329600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3329600,
-    "changeBPM": false,
-    "endTime": 3331200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3331200,
-    "changeBPM": false,
-    "endTime": 3332800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3332800,
-    "changeBPM": false,
-    "endTime": 3334400,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3334400,
-    "changeBPM": false,
-    "endTime": 3336000,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3336000,
-    "changeBPM": false,
-    "endTime": 3337600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3337600,
-    "changeBPM": false,
-    "endTime": 3339200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3339200,
-    "changeBPM": false,
-    "endTime": 3340800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3340800,
-    "changeBPM": false,
-    "endTime": 3342400,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3342400,
-    "changeBPM": false,
-    "endTime": 3344000,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3344000,
-    "changeBPM": false,
-    "endTime": 3345600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3345600,
-    "changeBPM": false,
-    "endTime": 3347200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3347200,
-    "changeBPM": false,
-    "endTime": 3348800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3348800,
-    "changeBPM": false,
-    "endTime": 3350400,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3350400,
-    "changeBPM": false,
-    "endTime": 3352000,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3352000,
-    "changeBPM": false,
-    "endTime": 3353600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3353600,
-    "changeBPM": false,
-    "endTime": 3355200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3355200,
-    "changeBPM": false,
-    "endTime": 3356800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3356800,
-    "changeBPM": false,
-    "endTime": 3358400,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3358400,
-    "changeBPM": false,
-    "endTime": 3360000,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3360000,
-    "changeBPM": false,
-    "endTime": 3361600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3361600,
-    "changeBPM": false,
-    "endTime": 3363200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3363200,
-    "changeBPM": false,
-    "endTime": 3364800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3364800,
-    "changeBPM": false,
-    "endTime": 3366400,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3366400,
-    "changeBPM": false,
-    "endTime": 3368000,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3368000,
-    "changeBPM": false,
-    "endTime": 3369600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3369600,
-    "changeBPM": false,
-    "endTime": 3371200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3371200,
-    "changeBPM": false,
-    "endTime": 3372800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3372800,
-    "changeBPM": false,
-    "endTime": 3374400,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3374400,
-    "changeBPM": false,
-    "endTime": 3376000,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3376000,
-    "changeBPM": false,
-    "endTime": 3377600,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3377600,
-    "changeBPM": false,
-    "endTime": 3379200,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3379200,
-    "changeBPM": false,
-    "endTime": 3380800,
-    "mustHitSection": true
-   },
-   {
-    "lengthInSteps": 16,
-    "altAnim": false,
-    "typeOfSection": 0,
-    "sectionNotes": [],
-    "bpm": 150,
-    "startTime": 3380800,
-    "changeBPM": false,
     "endTime": null,
     "mustHitSection": true
    }
   ],
-  "player2": "bf-pixel",
+  "player2": "bf",
   "eventObjects": [
    {
     "name": "Init BPM",
@@ -23267,10 +22918,11 @@
    }
   ],
   "chartVersion": "2",
-  "song": "snowflake",
+  "song": "Melted",
+  "stage": "stage",
   "validScore": true,
   "needsVoices": true,
   "bpm": 150,
-  "speed": 1.8
+  "speed": 2
  }
 }
