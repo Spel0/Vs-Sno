@@ -751,6 +751,20 @@ class PlayState extends MusicBeatState
 							}
 						add(evilSnow);
 					}
+					case 'church':
+						{
+							defaultCamZoom = 0.9;
+							curStage = 'church';
+							var bg:FlxSprite = new FlxSprite(-300, -600).loadGraphic(Paths.image('church3/bg'));
+							if(FlxG.save.data.antialiasing)
+							{
+								bg.antialiasing = true;
+							}
+							bg.scrollFactor.set(0.9, 0.9);
+							bg.active = false;
+							add(bg);
+
+						}
 				case 'school':
 					{
 						curStage = 'school';
@@ -1015,12 +1029,18 @@ class PlayState extends MusicBeatState
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
 
 		// REPOSITIONING PER STAGE
+		// LOL I I PU -1000 
 		switch (curStage)
 		{
 			case 'stage':
 				if (dad.curCharacter == "bf-pixel"){
 					dad.y = boyfriend.y + 150;
 					dad.x = boyfriend.x - 450;
+				}
+			case 'church':
+				if (dad.curCharacter == "sno"){
+					dad.y = boyfriend.y + -700;
+					dad.x = boyfriend.x + -800;
 				}
 			case 'limo':
 				boyfriend.y -= 220;
@@ -1030,7 +1050,6 @@ class PlayState extends MusicBeatState
 					resetFastCar();
 					add(fastCar);
 				}
-
 			case 'mall':
 				boyfriend.x += 200;
 

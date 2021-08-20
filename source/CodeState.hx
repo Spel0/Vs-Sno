@@ -35,6 +35,7 @@ class CodeState extends MusicBeatState
 {
   public static var codes:Array<Code> = [
     {code: "gospel",reward:"song:a"},
+    {code: "Gospel",reward:"song:a"},
   ];
 
   var inputText:FlxInputText;
