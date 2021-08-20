@@ -149,6 +149,7 @@ class PlayState extends MusicBeatState
 
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
+	private var floatshit:Float = 0;
 
 	private var gfSpeed:Int = 1;
 
@@ -2247,6 +2248,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		floatshit += 0.05;
 		#if !debug
 		perfectMode = false;
 		#end
@@ -2478,6 +2480,9 @@ class PlayState extends MusicBeatState
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
+		if (curSong == "gospel"){
+			dad.y += Math.sin(floatshit);
+		}
 
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
 		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
