@@ -36,6 +36,7 @@ class CodeState extends MusicBeatState
   public static var codes:Array<Code> = [
     {code: "gospel",reward:"song:a"},
     {code: "Gospel",reward:"song:a"},
+    {code: "whit",reward:"song:b"},
   ];
 
   var inputText:FlxInputText;
@@ -91,6 +92,19 @@ class CodeState extends MusicBeatState
         for(codeData in codes){
           if(text==codeData.code){
             if(codeData.reward.startsWith("song:")){
+              {
+                var songFormat = StringTools.replace("gospel-hard", " ", "-");
+                var poop:String = Highscore.formatSong(songFormat, 1);
+            
+                trace(poop);
+                  
+                PlayState.SONG = Song.loadFromJson(poop, "gospel");
+                PlayState.isStoryMode = false;
+                PlayState.storyDifficulty = 2;
+                PlayState.storyWeek = 0;
+                LoadingState.loadAndSwitchState(new PlayState());
+              }
+            }else if(codeData.reward.startsWith("song:b")){
               {
                 var songFormat = StringTools.replace("gospel-hard", " ", "-");
                 var poop:String = Highscore.formatSong(songFormat, 1);
