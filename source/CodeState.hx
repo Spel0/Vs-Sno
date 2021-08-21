@@ -104,14 +104,14 @@ class CodeState extends MusicBeatState
                 PlayState.storyWeek = 0;
                 LoadingState.loadAndSwitchState(new PlayState());
               }
-            }else if(codeData.reward.startsWith("song:b")){
+            }if(codeData.reward.startsWith("song:b")){
               {
-                var songFormat = StringTools.replace("gospel-hard", " ", "-");
+                var songFormat = StringTools.replace("ballistic-hard", " ", "-");
                 var poop:String = Highscore.formatSong(songFormat, 1);
             
                 trace(poop);
                   
-                PlayState.SONG = Song.loadFromJson(poop, "gospel");
+                PlayState.SONG = Song.loadFromJson(poop, "ballistic");
                 PlayState.isStoryMode = false;
                 PlayState.storyDifficulty = 2;
                 PlayState.storyWeek = 0;
