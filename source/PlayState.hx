@@ -233,6 +233,9 @@ class PlayState extends MusicBeatState
 	var funneEffect:FlxSprite;
 	var inCutscene:Bool = false;
 	var usedTimeTravel:Bool = false;
+	var wBg:FlxSprite;
+	var nwBg:FlxSprite;
+	var wstageFront:FlxSprite;
 
 	public static var repPresses:Int = 0;
 	public static var repReleases:Int = 0;
@@ -751,20 +754,40 @@ class PlayState extends MusicBeatState
 							}
 						add(evilSnow);
 					}
-					case 'church':
+				case 'ballisticAlley':
+					{
+						defaultCamZoom = 0.9;
+						curStage = 'ballisticAlley';
+						defaultCamZoom = 0.9;
+						var bg:FlxSprite = new FlxSprite(-300, -270).loadGraphic(Paths.image('sec/whittyBack'));
 						{
-							defaultCamZoom = 0.9;
-							curStage = 'church';
-							var bg:FlxSprite = new FlxSprite(-300, -600).loadGraphic(Paths.image('church3/bg'));
-							if(FlxG.save.data.antialiasing)
-							{
-								bg.antialiasing = true;
-							}
-							bg.scrollFactor.set(0.9, 0.9);
-							bg.active = false;
-							add(bg);
-
+							bg.antialiasing = true;
 						}
+						bg.scrollFactor.set(0.9, 0.9);
+						bg.active = false;
+						add(bg);
+
+						funneEffect = new FlxSprite(-600, -200).loadGraphic(Paths.image('sec/thefunnyeffect'));
+						funneEffect.alpha = 0.5;
+						funneEffect.scrollFactor.set();
+						funneEffect.visible = true;
+						add(funneEffect);
+				
+						funneEffect.cameras = [camHUD];
+					}
+				case 'church':
+					{
+						defaultCamZoom = 0.9;
+						curStage = 'church';
+						var bg:FlxSprite = new FlxSprite(-300, -600).loadGraphic(Paths.image('church3/bg'));
+						if(FlxG.save.data.antialiasing)
+						{
+							bg.antialiasing = true;
+						}
+						bg.scrollFactor.set(0.9, 0.9);
+						bg.active = false;
+						add(bg);
+					}
 				case 'school':
 					{
 						curStage = 'school';
@@ -1042,6 +1065,9 @@ class PlayState extends MusicBeatState
 					dad.y = boyfriend.y + -700;
 					dad.x = boyfriend.x + -800;
 				}
+			case 'ballisticAlley':
+				boyfriend.x += 300;
+	
 			case 'limo':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;

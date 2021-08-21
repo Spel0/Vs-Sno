@@ -37,6 +37,7 @@ class CodeState extends MusicBeatState
     {code: "gospel",reward:"song:a"},
     {code: "Gospel",reward:"song:a"},
     {code: "whit",reward:"song:b"},
+    {code: "Whit",reward:"song:b"},
   ];
 
   var inputText:FlxInputText;
