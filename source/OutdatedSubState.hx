@@ -25,10 +25,7 @@ class OutdatedSubState extends MusicBeatState
 		bg.scale.x *= 1.55;
 		bg.scale.y *= 1.55;
 		bg.screenCenter();
-		if(FlxG.save.data.antialiasing)
-			{
-				bg.antialiasing = true;
-			}
+		bg.antialiasing = FlxG.save.data.antialiasing;
 		add(bg);
 	}
 	override function update(elapsed:Float)

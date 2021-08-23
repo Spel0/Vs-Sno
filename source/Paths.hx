@@ -1,8 +1,6 @@
 package;
 
-import openfl.utils.Assets;
 import flixel.graphics.FlxGraphic;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
@@ -164,7 +162,7 @@ class Paths
 		if (isCharacter)
 			if (usecahce)
 				#if cpp
-				return FlxAtlasFrames.fromSpriteSheetPacker(imageCached(key), file('images/$key.txt', library));
+				return FlxAtlasFrames.fromSpriteSheetPacker(imageCached(key), file('images/characters/$key.txt', library));
 				#else
 				return null;
 				#end

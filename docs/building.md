@@ -24,7 +24,7 @@
 	 - `haxelib install flixel-ui`
 	 - `haxelib install hscript`
 	 - `haxelib install newgrounds`
-	 - `haxelib install linc_luajit`
+	 - `haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit.git`
 	 - `haxelib git faxe https://github.com/uhrobots/faxe`
 	 - `haxelib git polymod https://github.com/larsiusprime/polymod.git`
 	 - `haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc`
@@ -36,13 +36,9 @@
 If you are planning to build for Windows, you also need to install **Visual Studio 2019**. While installing it, *don't click on any of the options to install workloads*. Instead, go to the **individual components** tab and choose the following:
 
 -   MSVC v142 - VS 2019 C++ x64/x86 build tools
--   MSVC v141 - VS 2017 C++ x64/x86 build tools
 -   Windows SDK (10.0.17763.0)
--   C++ Profiling tools
--   C++ CMake tools for windows
--   C++ ATL for v142 build tools (x86 & x64)
 
-This will install about 7 GB of crap, but is necessary to build for Windows.
+This will install about 4 GB of crap, but is necessary to build for Windows.
 
 ### macOS-only dependencies (these are required for building on macOS at all, including html5.)
 If you are running macOS, you'll need to install Xcode. You can download it from the macOS App Store or from the [Xcode website](https://developer.apple.com/xcode/).
@@ -61,5 +57,6 @@ Since you already installed `git` in a previous step, we'll use it to clone the 
 Finally, we are ready to build.
 
 - Run `lime build <target>`, replacing `<target>` with the platform you want to build to (`windows`, `mac`, `linux`, `html5`) (i.e. `lime build windows`)
-- The build will be in `Kade-Engine/export/<target>/bin`, with `<target>` being the target you built to in the previous step. (i.e. `Kade-Engine/export/windows/bin`)
-- Only the `bin` folder is necessary to run the game. The other ones in `export/<target>` are not.
+- The build will be in `Kade-Engine/export/release/<target>/bin`, with `<target>` being the target you built to in the previous step. (i.e. `Kade-Engine/export/release/windows/bin`)
+- Incase you added the -debug flag the files will be inside `Kade-Engine/export/debug/<target>/bin`
+- Only the `bin` folder is necessary to run the game. The other ones in `export/release/<target>` are not.
