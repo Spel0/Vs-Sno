@@ -1821,8 +1821,6 @@ class ChartingState extends MusicBeatState
 
 	public var shownNotes:Array<Note> = [];
 
-	public var snapSelection = 3;
-
 	public var selectedBoxes:FlxTypedGroup<ChartingBox>;
 
 	public var waitingForRelease:Bool = false;
