@@ -395,36 +395,63 @@ class Stage
 							add(waveSpriteFG);
 						 */
 					}
+				case 'ballisticAlley':
+				{
+					camZoom = 0.9;
+					curStage = 'ballisticAlley';
+					var bg:FlxSprite = new FlxSprite(-300, -270).loadGraphic(Paths.image('sec/whittyBack'));
+					bg.antialiasing = FlxG.save.data.antialiasing;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					toAdd.push(bg);
+
+					var funneEffect = new FlxSprite(-600, -200).loadGraphic(Paths.image('sec/thefunnyeffect'));
+					funneEffect.alpha = 0.5;
+					funneEffect.scrollFactor.set();
+					funneEffect.visible = true;
+					toAdd.push(funneEffect);
+					swagBacks['funneEffect'] = funneEffect;
+				}
+				case 'church':
+				{
+					camZoom = 0.9;
+					curStage = 'church';
+					var bg:FlxSprite = new FlxSprite(-300, -600).loadGraphic(Paths.image('church3/bg'));
+					bg.antialiasing = FlxG.save.data.antialiasing;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					toAdd.push(bg);
+				}
 				default:
-					{
-						camZoom = 0.9;
-						curStage = 'stage';
-						var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-						bg.antialiasing = FlxG.save.data.antialiasing;
-						bg.scrollFactor.set(0.9, 0.9);
-						bg.active = false;
-						swagBacks['bg'] = bg;
-                        toAdd.push(bg);
+				{
+					camZoom = 0.9;
+					curStage = 'stage';
+					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+					bg.antialiasing = FlxG.save.data.antialiasing;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					swagBacks['bg'] = bg;
+					toAdd.push(bg);
 
-						var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
-						stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-						stageFront.updateHitbox();
-						stageFront.antialiasing = FlxG.save.data.antialiasing;
-						stageFront.scrollFactor.set(0.9, 0.9);
-						stageFront.active = false;
-						swagBacks['stageFront'] = stageFront;
-                        toAdd.push(stageFront);
+					var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+					stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+					stageFront.updateHitbox();
+					stageFront.antialiasing = FlxG.save.data.antialiasing;
+					stageFront.scrollFactor.set(0.9, 0.9);
+					stageFront.active = false;
+					swagBacks['stageFront'] = stageFront;
+					toAdd.push(stageFront);
 
-						var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
-						stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-						stageCurtains.updateHitbox();
-						stageCurtains.antialiasing = FlxG.save.data.antialiasing;
-						stageCurtains.scrollFactor.set(1.3, 1.3);
-						stageCurtains.active = false;
+					var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+					stageCurtains.updateHitbox();
+					stageCurtains.antialiasing = FlxG.save.data.antialiasing;
+					stageCurtains.scrollFactor.set(1.3, 1.3);
+					stageCurtains.active = false;
 
-						swagBacks['stageCurtains'] = stageCurtains;
-                        toAdd.push(stageCurtains);
-					}
+					swagBacks['stageCurtains'] = stageCurtains;
+					toAdd.push(stageCurtains);
+				}
         }
     }
 }

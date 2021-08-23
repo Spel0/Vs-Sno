@@ -665,7 +665,7 @@ class PlayState extends MusicBeatState
 				}
 			case 'ballisticAlley':
 				boyfriend.x += 300;
-	
+				Stage.swagBacks['funneEffect'].camera = [camHUD];
 			case 'limo':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;
