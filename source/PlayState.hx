@@ -665,7 +665,8 @@ class PlayState extends MusicBeatState
 				}
 			case 'ballisticAlley':
 				boyfriend.x += 300;
-				Stage.swagBacks['funneEffect'].camera = [camHUD];
+				funneEffect = Stage.swagBacks['funneEffect'];
+				funneEffect.cameras = [camHUD];
 			case 'limo':
 				boyfriend.y -= 220;
 				boyfriend.x += 260;
@@ -1685,7 +1686,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var daType = songNotes[3];
+				var daType = songNotes[5];
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote,false,false,false,songNotes[4], daType);
 
